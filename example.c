@@ -29,9 +29,7 @@ main(int argc, char *argv[])
 
     lstat(argv[1], stbuf);
     vfprintstatf(outbuf, fmt, stbuf);
-
     printf("%s", outbuf);
-    free(outbuf);
 
     exit(EXIT_SUCCESS);
 }

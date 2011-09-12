@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I.
+CFLAGS=-I. -g
 DEPS = vfprintstatf.h
 OBJ = vfprintstatf.o example.o 
 

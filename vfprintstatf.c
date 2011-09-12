@@ -35,7 +35,7 @@ vfprintstatf(char *s, char *format, struct stat *stbuf)
     struct group *grp;
     int i = 0;
 
-    if(format != NULL)
+    if(format != NULL && stbuf != NULL)
     {
         for(p = format; *p != '\0'; p++)
         {
