@@ -9,7 +9,6 @@ main(int argc, char *argv[])
 {
     char *outbuf = (char *)malloc(2048 * sizeof(char));
     struct stat stbuf;
-
     char *fmt = \
         "st_atime (decimal) = \"%a\"\n"
         "st_atime (string)  = \"%A\"\n"
@@ -28,10 +27,11 @@ main(int argc, char *argv[])
         "st_uid             = \"%U\"\n";
 
     lstat(argv[1], &stbuf);
+
     sprintstatf(outbuf, fmt, &stbuf);
     printf("%s", outbuf);
-    free(outbuf);
 
+    free(outbuf);
     exit(EXIT_SUCCESS);
 }
 
