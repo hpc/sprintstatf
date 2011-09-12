@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I. -g
-DEPS = vfprintstatf.h
-OBJ = vfprintstatf.o example.o 
+DEPS = sprintstatf.h
+OBJ = sprintstatf.o example.o 
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

@@ -1,4 +1,4 @@
-vfprintstatf
+sprintstatf
 ============
 
 The % sequences are:
@@ -25,5 +25,5 @@ The % sequences are:
 The prototype is:
 
 ```C
-int vfprintstatf(char *s, char *format, struct stat *stbuf)
+int sprintstatf(char *out, char *format, struct stat *stbuf)
 ```

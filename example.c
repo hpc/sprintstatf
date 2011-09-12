@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "vfprintstatf.h"
+#include "sprintstatf.h"
 
 int
 main(int argc, char *argv[])
 {
-    char outbuf[2048];
+    char *outbuf = (char *)malloc(2048 * sizeof(char));
     struct stat stbuf;
 
     char *fmt = \
@@ -28,8 +28,9 @@ main(int argc, char *argv[])
         "st_uid             = \"%U\"\n";
 
     lstat(argv[1], &stbuf);
-    vfprintstatf(outbuf, fmt, &stbuf);
+    sprintstatf(outbuf, fmt, &stbuf);
     printf("%s", outbuf);
+    free(outbuf);
 
     exit(EXIT_SUCCESS);
 }

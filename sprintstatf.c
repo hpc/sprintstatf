@@ -1,4 +1,4 @@
-#include "vfprintstatf.h"
+#include "sprintstatf.h"
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -6,7 +6,7 @@
 #include <pwd.h>
 
 int
-vfprintstatf(char *s, char *format, struct stat *stbuf)
+sprintstatf(char *out, char *format, struct stat *stbuf)
 {
     char *p;
     struct passwd *pwp;
@@ -19,82 +19,89 @@ vfprintstatf(char *s, char *format, struct stat *stbuf)
         {
             if(*p != '%')
             {
-                putchar(*p);
+                out[i++] = *p;
                 continue;
             }
 
             switch(*++p)
             {
                 case 'a':
-                    printf("%ld", (long)stbuf->st_atime);
+                     i += sprintf(out+i, "%ld", (long)stbuf->st_atime);
                     break;
 
                 case 'A':
-                    printf("%.24s", ctime(&(stbuf->st_atime)));
+                    i += sprintf(out+i, "%.24s", ctime(&(stbuf->st_atime)));
                     break;
 
                 case 'c':
-                    printf("%ld", (long)stbuf->st_ctime);
+                    i += sprintf(out+i, "%ld", (long)stbuf->st_ctime);
                     break;
 
                 case 'C':
-                    printf("%.24s", ctime(&(stbuf->st_ctime)));
+                    i += sprintf(out+i, "%.24s", ctime(&(stbuf->st_ctime)));
                     break;
 
                 case 'g':
-                    printf("%d", stbuf->st_gid);
+                    i += sprintf(out+i, "%d", stbuf->st_gid);
                     break;
+
                 case 'G':
                     grp = getgrgid(stbuf->st_gid);
-                    printf("%s",
+                    i += sprintf(out+i, "%s",
                         (grp != NULL) ? grp->gr_name :
                             "");
                     break;
+
                 case 'i':
-                    printf("%llu", (long long)stbuf->st_ino);
+                    i += sprintf(out+i, "%llu", (long long)stbuf->st_ino);
                     break;
 
                 case 'm':
-                    printf("%ld", (long)stbuf->st_mtime);
+                    i += sprintf(out+i, "%ld", (long)stbuf->st_mtime);
                     break;
 
                 case 'M':
-                    printf("%.24s", ctime(&(stbuf->st_mtime)));
+                    i += sprintf(out+i, "%.24s", ctime(&(stbuf->st_mtime)));
                     break;
 
                 case 'n':
-                    printf("%d", stbuf->st_nlink);
+                    i += sprintf(out+i, "%d", stbuf->st_nlink);
                     break;
 
                 case 'p':
-                    printf("%o", stbuf->st_mode);
+                    i += sprintf(out+i, "%o", stbuf->st_mode);
                     break;
 
                 case 'P':
-                    printf("%s", lsmodes(stbuf->st_mode));
+                    i += sprintf(out+i, "%s", lsmodes(stbuf->st_mode));
                     break;
 
                 case 's':
-                    printf("%llu", (long long)stbuf->st_size);
+                    i += sprintf(out+i, "%llu", (long long)stbuf->st_size);
                     break;
+
                 case 'u':
-                    printf("%d", stbuf->st_uid);
+                    i += sprintf(out+i, "%d", stbuf->st_uid);
                     break;
+
                 case 'U':
                     pwp = getpwuid(stbuf->st_uid);
-                    printf("%s",
+                    i += sprintf(out+i, "%s",
                         (pwp != NULL) ? pwp->pw_name :
                             "");
                     break;
+
                 case '%':
-                    putchar('%');
+                    out[i++] = '%';
                     break;
 
                 /* default ignored */
             }
         }
-        putchar('\n');
+        out[i] = '\0';
     }
+
+    return i;
 }
 
 char *
