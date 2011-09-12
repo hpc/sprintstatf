@@ -27,3 +27,5 @@ The prototype is:
 ```C
 int sprintstatf(char *out, char *format, struct stat *stbuf)
 ```
+
+See example.c for a live version that stat()s the file specified at argv[1].
