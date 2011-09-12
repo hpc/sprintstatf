@@ -8,7 +8,7 @@ int
 main(int argc, char *argv[])
 {
     char outbuf[2048];
-    struct stat *stbuf;
+    struct stat stbuf;
 
     char *fmt = \
         "st_atime (decimal) = \"%a\"\n"
@@ -27,8 +27,8 @@ main(int argc, char *argv[])
         "st_uid             = \"%u\"\n"
         "st_uid             = \"%U\"\n";
 
-    lstat(argv[1], stbuf);
-    vfprintstatf(outbuf, fmt, stbuf);
+    lstat(argv[1], &stbuf);
+    vfprintstatf(outbuf, fmt, &stbuf);
     printf("%s", outbuf);
 
     exit(EXIT_SUCCESS);
