@@ -2,7 +2,7 @@ sprintstatf
 ============
 sprintstatf is a little helper function to simplify printing a stat struct.
 
-Thanks to Steve Summit <scs@eskimo.com> for releasing the original version of
+Thanks to Steve Summit (<scs@eskimo.com>) for releasing the original version of
 this code into the public domain.
 
 Usage
