@@ -1,6 +1,12 @@
 sprintstatf
 ============
+sprintstatf is a little helper function to simplify printing a stat struct.
 
+Thanks to Steve Summit <scs@eskimo.com> for releasing the original version of
+this code into the public domain.
+
+Usage
+-----
 The % sequences are:
 
 ```
@@ -28,4 +34,6 @@ The prototype is:
 int sprintstatf(char *out, char *format, struct stat *stbuf)
 ```
 
+Example
+-------
 See example.c for a live version that stat()s the file specified at argv[1].
